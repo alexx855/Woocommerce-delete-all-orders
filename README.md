@@ -1,12 +1,8 @@
-# Delete all Woocommerce orders
-Delete all your Woocommerce orders with this script. Use at own risk
+# Delete all your Wordpress users except administrator
+Use this script at your own risk
 
 ## I just want the SQL-queries
 Here you go!
 ```sql
-DELETE FROM wp_woocommerce_order_itemmeta;
-DELETE FROM wp_woocommerce_order_items;
-DELETE FROM wp_comments WHERE comment_type = 'order_note';
-DELETE FROM wp_postmeta WHERE post_id IN ( SELECT ID FROM wp_posts WHERE post_type = 'shop_order' );
-DELETE FROM wp_posts WHERE post_type = 'shop_order';
+DELETE wu FROM `wp_users` wu INNER JOIN wp_usermeta ON wu.ID = wp_usermeta.user_id WHERE meta_key = 'wp_capabilities' AND meta_value NOT LIKE '%administrator%'
 ```
